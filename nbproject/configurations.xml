@@ -39,6 +39,9 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <linkerTool>
+          <linkerCopySharedLibs>true</linkerCopySharedLibs>
+        </linkerTool>
       </compileType>
       <item path="Board.cpp" ex="false" tool="1" flavor2="0">
       </item>

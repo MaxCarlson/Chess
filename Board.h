@@ -15,6 +15,7 @@
 #define BOARD_H
 #include <cstdlib>
 #include <iostream>
+#include <windows.h>
 
 #include "Pieces.h"
 
@@ -30,9 +31,10 @@ public:
     virtual ~Board();
     
     Pieces* boardPieces[8][8];
-    char boardArr[8][8];
+    string boardArr[8][8];
     string move, piece;
     
+    printBoard();
     whiteMove();
     blackMove();
 

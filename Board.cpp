@@ -15,14 +15,25 @@
 
 
 Board::Board() {
+    //placing blank spaces
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
             boardPieces[j][i] = new NoPiece;
+            boardArr[j][i] = " ";
         }
         
     }
+    //black pieces
     for(int i = 0; i < 8; i++){
-        boardPieces[1][i] = new BlackPawn;
+        boardPieces[i][1] = new BlackPawn;
+        boardArr[i][1] = "bp";
+    }
+    
+    
+    //white pieces
+    for(int i = 0; i < 8; i++){
+        boardPieces[i][6] = new WhitePawn;
+        boardArr[i][6] = "wp";
     }
         
 }
@@ -41,6 +52,40 @@ Board::blackMove(){
         cin >> move;
     }
 
+
+Board::printBoard(){
+    //color stuff
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    //print loops
+    for(int i = 0; i < 8; i++){
+        for (int j = 0; j < 8; j++){
+            if(j%2 == 0){
+                if(i%2 == 0){
+                    SetConsoleTextAttribute(hConsole, 240);
+                } else {
+                    SetConsoleTextAttribute(hConsole, 128);
+                }
+                
+            }else if (j%2 != 0){
+                if(i%2 == 0){
+                    SetConsoleTextAttribute(hConsole, 128);
+                } else {
+                    SetConsoleTextAttribute(hConsole, 240);
+                }
+            }
+            if(boardArr[j][i] == " "){
+                cout << " " << " ";
+            } else if (boardArr[j][i] == "wp"){
+                cout << "P" << " ";
+            } else if (boardArr[j][i] == "bp"){
+                cout << "P" << " ";
+            }
+        }
+        cout << endl;
+    }
+    int n;
+    cin >> n;
+}
 
 Board::Board(const Board& orig) {
 }
