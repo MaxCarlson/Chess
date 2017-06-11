@@ -73,12 +73,12 @@ Board::printBoard(){
                     SetConsoleTextAttribute(hConsole, 240);
                 }
             }
-            if(boardArr[j][i] == " "){
+            if(boardPieces[j][i]->symbol == " "){
                 cout << " " << " " << std::flush;
-            } else if (boardArr[j][i] == "wp"){
-                cout << "P" << " " << std::flush;
-            } else if (boardArr[j][i] == "bp"){
-                cout << "P" << " " << std::flush;
+            } else if (boardPieces[j][i]->symbol == "wp"){
+                cout << "wP"  << std::flush;
+            } else if (boardPieces[j][i]->symbol == "bp"){
+                cout << "bP"  << std::flush;
             }
         }
         cout << endl;

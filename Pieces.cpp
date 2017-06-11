@@ -18,6 +18,7 @@ Pieces::Pieces() {
 
 }
 
+
 WhitePawn::WhitePawn(){
     
 }

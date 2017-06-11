@@ -21,16 +21,18 @@
 class Pieces {
 private:
 public:
+    std::string symbol = " ";
     Pieces();
     
 
-
+    
 };
 
 
 class WhitePawn: public Pieces{
 private:
 public:
+    std::string symbol = "wp";
     WhitePawn();
     
     
@@ -39,6 +41,7 @@ public:
 class BlackPawn: public Pieces{
 private:
 public:
+    std::string symbol = "bp";
     BlackPawn();
     
     
@@ -48,7 +51,9 @@ public:
 class NoPiece: public Pieces{
 private:
 public:
+    std::string symbol = " ";
     NoPiece();
+    
 };
 #endif /* PIECES_H */
 
