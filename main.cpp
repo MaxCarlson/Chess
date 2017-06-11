@@ -18,7 +18,8 @@
 #include <time.h>
 
 #include "Board.h"
-#include "Pieces.h"
+#include "MoveChecking.h"
+//#include "Pieces.h"
 #include <windows.h>
 
 
@@ -72,6 +73,9 @@ int main(int argc, char** argv) {
 
     Board  newBoard;
     newBoard.printBoard();
+    MoveChecking newCheck;
+    
+    
 
     int n;
     cin >> n;

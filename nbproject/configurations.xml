@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>Board.h</itemPath>
+      <itemPath>MoveChecking.h</itemPath>
       <itemPath>Pieces.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -15,6 +16,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>Board.cpp</itemPath>
+      <itemPath>MoveChecking.cpp</itemPath>
       <itemPath>Pieces.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -47,6 +49,10 @@
       </item>
       <item path="Board.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="MoveChecking.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MoveChecking.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Pieces.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Pieces.h" ex="false" tool="3" flavor2="0">
@@ -77,6 +83,10 @@
       <item path="Board.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Board.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MoveChecking.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MoveChecking.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Pieces.cpp" ex="false" tool="1" flavor2="0">
       </item>

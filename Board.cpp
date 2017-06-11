@@ -93,8 +93,7 @@ Board::printBoard(){
         }
         cout << endl;
     }
-    int n;
-    cin >> n;
+    
 }
 
 Board::Board(const Board& orig) {
