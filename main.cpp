@@ -18,8 +18,7 @@
 #include <time.h>
 
 #include "Board.h"
-
-#include "Pawn.h"
+#include "Pieces.h"
 
 using namespace std;
 
@@ -27,6 +26,7 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
+    
     
     
     

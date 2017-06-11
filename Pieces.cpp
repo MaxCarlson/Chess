@@ -5,29 +5,27 @@
  */
 
 /* 
- * File:   Pawn.cpp
+ * File:   Pieces.cpp
  * Author: C-60
  * 
- * Created on June 10, 2017, 9:14 PM
+ * Created on June 10, 2017, 10:50 PM
  */
 
-#include "Pawn.h"
+#include "Pieces.h"
 
-Pawn::Pawn() {
+
+Pieces::Pieces() {
+
+}
+
+WhitePawn::WhitePawn(){
     
 }
 
-Pawn::moveWhite(int x, int y){
+BlackPawn::BlackPawn(){
     
 }
 
-Pawn::moveBlack(int x, int y){
+NoPiece::NoPiece(){
     
 }
-
-Pawn::Pawn(const Pawn& orig) {
-}
-
-Pawn::~Pawn() {
-}
-

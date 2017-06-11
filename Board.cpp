@@ -13,11 +13,33 @@
 
 #include "Board.h"
 
+
 Board::Board() {
-    
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            boardPieces[j][i] = new NoPiece;
+        }
+        
+    }
+    for(int i = 0; i < 8; i++){
+        boardPieces[1][i] = new BlackPawn;
+    }
         
 }
 
+Board::whiteMove(){
+        cout <<"Whites move, which piece would you like to move?" << endl;
+        cin >> piece;
+        cout <<"Where would you like to move your piece?" << endl;
+        cin >> move;
+    }
+
+Board::blackMove(){
+        cout <<"Blacks move, which piece would you like to move?" << endl;
+        cin >> piece;
+        cout <<"Where would you like to move your piece?" << endl;
+        cin >> move;
+    }
 
 
 Board::Board(const Board& orig) {

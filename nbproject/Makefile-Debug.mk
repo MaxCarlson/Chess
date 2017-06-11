@@ -36,7 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Board.o \
-	${OBJECTDIR}/Pawn.o \
+	${OBJECTDIR}/Pieces.o \
 	${OBJECTDIR}/main.o
 
 
@@ -69,10 +69,10 @@ ${OBJECTDIR}/Board.o: Board.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Board.o Board.cpp
 
-${OBJECTDIR}/Pawn.o: Pawn.cpp
+${OBJECTDIR}/Pieces.o: Pieces.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pawn.o Pawn.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pieces.o Pieces.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}

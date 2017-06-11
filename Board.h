@@ -16,6 +16,8 @@
 #include <cstdlib>
 #include <iostream>
 
+#include "Pieces.h"
+
 using namespace std;
 
 
@@ -27,21 +29,12 @@ public:
     Board(const Board& orig);
     virtual ~Board();
     
+    Pieces* boardPieces[8][8];
     char boardArr[8][8];
     string move, piece;
-    whiteMove(){
-        cout <<"Whites move, which piece would you like to move?" << endl;
-        cin >> piece;
-        cout <<"Where would you like to move your piece?" << endl;
-        cin >> move;
-    }
-
-    blackMove(){
-        cout <<"Blacks move, which piece would you like to move?" << endl;
-        cin >> piece;
-        cout <<"Where would you like to move your piece?" << endl;
-        cin >> move;
-    }
+    
+    whiteMove();
+    blackMove();
 
 };
 

@@ -1,5 +1,5 @@
-build/Debug/Cygwin-Windows/main.o: main.cpp Board.h Pawn.h
+build/Debug/Cygwin-Windows/main.o: main.cpp Board.h Pieces.h
 
 Board.h:
 
-Pawn.h:
+Pieces.h:
