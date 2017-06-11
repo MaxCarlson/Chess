@@ -54,11 +54,21 @@ Board::blackMove(){
 
 
 Board::printBoard(){
+    char alphabet[] = {'a','b','c','d','e','f','g','h'};
     //color stuff
     const HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     //print loops
+    cout << "  ";
     for(int i = 0; i < 8; i++){
+        cout << alphabet[i] << " ";
+    }
+    cout << endl;
+    for(int i = 0; i < 8; i++){
+        //reset console to normal color
+        SetConsoleTextAttribute(hConsole, 15);        
+        cout << i+1 << " "<< std::flush;
         for (int j = 0; j < 8; j++){
+            
             if(j%2 == 0){
                 if(i%2 == 0){
                     SetConsoleTextAttribute(hConsole, 240);
@@ -73,11 +83,11 @@ Board::printBoard(){
                     SetConsoleTextAttribute(hConsole, 240);
                 }
             }
-            if(boardPieces[j][i]->symbol == " "){
+            if(boardArr[j][i] == " "){
                 cout << " " << " " << std::flush;
-            } else if (boardPieces[j][i]->symbol == "wp"){
+            } else if (boardArr[j][i] == "wp"){
                 cout << "wP"  << std::flush;
-            } else if (boardPieces[j][i]->symbol == "bp"){
+            } else if (boardArr[j][i] == "bp"){
                 cout << "bP"  << std::flush;
             }
         }
