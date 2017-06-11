@@ -13,13 +13,35 @@
 
 #ifndef BOARD_H
 #define BOARD_H
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
 
 class Board {
+private:
+    
 public:
     Board();
     Board(const Board& orig);
     virtual ~Board();
-private:
+    
+    char boardArr[8][8];
+    string move, piece;
+    whiteMove(){
+        cout <<"Whites move, which piece would you like to move?" << endl;
+        cin >> piece;
+        cout <<"Where would you like to move your piece?" << endl;
+        cin >> move;
+    }
+
+    blackMove(){
+        cout <<"Blacks move, which piece would you like to move?" << endl;
+        cin >> piece;
+        cout <<"Where would you like to move your piece?" << endl;
+        cin >> move;
+    }
 
 };
 

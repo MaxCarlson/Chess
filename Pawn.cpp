@@ -5,24 +5,29 @@
  */
 
 /* 
- * File:   Board.cpp
+ * File:   Pawn.cpp
  * Author: C-60
  * 
- * Created on June 10, 2017, 8:39 PM
+ * Created on June 10, 2017, 9:14 PM
  */
 
-#include "Board.h"
+#include "Pawn.h"
 
-Board::Board() {
+Pawn::Pawn() {
     
-        
 }
 
-
-
-Board::Board(const Board& orig) {
+Pawn::moveWhite(int x, int y){
+    
 }
 
-Board::~Board() {
+Pawn::moveBlack(int x, int y){
+    
+}
+
+Pawn::Pawn(const Pawn& orig) {
+}
+
+Pawn::~Pawn() {
 }
 

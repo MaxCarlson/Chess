@@ -12,6 +12,14 @@
  */
 
 #include <cstdlib>
+#include <iostream>
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>
+
+#include "Board.h"
+
+#include "Pawn.h"
 
 using namespace std;
 
@@ -19,6 +27,12 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
+    
+    
+    
+    
+    Board  newBoard;
+    newBoard.whiteMove();
 
     return 0;
 }
