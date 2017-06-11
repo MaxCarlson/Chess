@@ -19,8 +19,8 @@
 
 #include "Board.h"
 #include "Pieces.h"
-
 #include <windows.h>
+
 
 
 
@@ -29,77 +29,79 @@ using namespace std;
 /*
  * 
  */
+enum ConsoleColors
+{
+   BlackFore   = 0,
+   MaroonFore  = FOREGROUND_RED,
+   GreenFore   = FOREGROUND_GREEN,
+   NavyFore    = FOREGROUND_BLUE,
+   TealFore    = FOREGROUND_GREEN | FOREGROUND_BLUE,
+   OliveFore   = FOREGROUND_RED | FOREGROUND_GREEN,
+   PurpleFore  = FOREGROUND_RED | FOREGROUND_BLUE,
+   GrayFore    = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE,
+   SilverFore  = FOREGROUND_INTENSITY,
+   RedFore     = FOREGROUND_INTENSITY | FOREGROUND_RED,
+   LimeFore    = FOREGROUND_INTENSITY | FOREGROUND_GREEN,
+   BlueFore    = FOREGROUND_INTENSITY | FOREGROUND_BLUE,
+   AquaFore    = FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE,
+   YellowFore  = FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN,
+   FuchsiaFore = FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE,
+   WhiteFore   = FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE,
 
-void SetColor(int ForgC)
- {
- WORD wColor;
+   BlackBack   = 0,
+   MaroonBack  = BACKGROUND_RED,
+   GreenBack   = BACKGROUND_GREEN,
+   NavyBack    = BACKGROUND_BLUE,
+   TealBack    = BACKGROUND_GREEN | BACKGROUND_BLUE,
+   OliveBack   = BACKGROUND_RED | BACKGROUND_GREEN,
+   PurpleBack  = BACKGROUND_RED | BACKGROUND_BLUE,
+   GrayBack    = BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE,
+   SilverBack  = BACKGROUND_INTENSITY,
+   RedBack     = BACKGROUND_INTENSITY | BACKGROUND_RED,
+   LimeBack    = BACKGROUND_INTENSITY | BACKGROUND_GREEN,
+   BlueBack    = BACKGROUND_INTENSITY | BACKGROUND_BLUE,
+   AquaBack    = BACKGROUND_INTENSITY | BACKGROUND_GREEN | BACKGROUND_BLUE,
+   YellowBack  = BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN,
+   FuchsiaBack = BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE,
+   WhiteBack   = BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE,
+};
 
-  HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-  CONSOLE_SCREEN_BUFFER_INFO csbi;
 
-                       //We use csbi for the wAttributes word.
- if(GetConsoleScreenBufferInfo(hStdOut, &csbi))
- {
-                 //Mask out all but the background attribute, and add in the forgournd color
-      wColor = (csbi.wAttributes & 0xF0) + (ForgC & 0x0F);
-      SetConsoleTextAttribute(hStdOut, wColor);
- }
-  return;
- }
-
-void ClearConsoleToColors(int ForgC, int BackC)
- {
- WORD wColor = ((BackC & 0x0F) << 4) + (ForgC & 0x0F);
-               //Get the handle to the current output buffer...
- HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-                     //This is used to reset the carat/cursor to the top left.
- COORD coord = {0, 0};
-                  //A return value... indicating how many chars were written
-                    //   not used but we need to capture this since it will be
-                      //   written anyway (passing NULL causes an access violation).
-  DWORD count;
-
-                               //This is a structure containing all of the console info
-                      // it is used here to find the size of the console.
- CONSOLE_SCREEN_BUFFER_INFO csbi;
-                 //Here we will set the current color
- SetConsoleTextAttribute(hStdOut, wColor);
- if(GetConsoleScreenBufferInfo(hStdOut, &csbi))
- {
-                          //This fills the buffer with a given character (in this case 32=space).
-      FillConsoleOutputCharacter(hStdOut, (TCHAR) 32, csbi.dwSize.X * csbi.dwSize.Y, coord, &count);
-
-      FillConsoleOutputAttribute(hStdOut, csbi.wAttributes, csbi.dwSize.X * csbi.dwSize.Y, coord, &count );
-                          //This will set our cursor position for the next print statement.
-      SetConsoleCursorPosition(hStdOut, coord);
- }
- return;
-}
 int main(int argc, char** argv) {
     
-    /*
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, 0);
-    cout << 1;
-    hConsole = NULL;
-    
-    SetConsoleTextAttribute(hConsole,15);
-    cout << 2;
-    int n;
-    cin >> n;
-    */
-    ClearConsoleToColors(2,15);
-    SetColor(4);
-    printf("\n \n \t This text is written in Red Color \n ");
-    int n;
-    cin >> n;
-  
-    
-    
-    //Board  newBoard;
-    //newBoard.printBoard();
 
+    Board  newBoard;
+    newBoard.printBoard();
+
+    int n;
+    cin >> n;
     return 0;
 }
+
+/*
+    const HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    // yellow on blue
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY | BACKGROUND_BLUE);
+    SetConsoleTextAttribute(hConsole, BlackBack | RedFore);
+    std::cout << 11111 << std::flush;
+
+    // blue on bright green
+    SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+    std::cout << 2222 << std::flush;
+
+    // reset to black on white
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+    std::cout << std::endl;
+    
+    
+    SetConsoleTextAttribute(hConsole, 5 | 15);
+    std::cout << 1111 << std::flush;
+    
+   
+    SetConsoleTextAttribute(hConsole,5 | 0);
+    std::cout << 2222;
+    */
+
 
  

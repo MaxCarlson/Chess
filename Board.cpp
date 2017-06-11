@@ -55,7 +55,7 @@ Board::blackMove(){
 
 Board::printBoard(){
     //color stuff
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    const HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     //print loops
     for(int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
@@ -74,11 +74,11 @@ Board::printBoard(){
                 }
             }
             if(boardArr[j][i] == " "){
-                cout << " " << " ";
+                cout << " " << " " << std::flush;
             } else if (boardArr[j][i] == "wp"){
-                cout << "P" << " ";
+                cout << "P" << " " << std::flush;
             } else if (boardArr[j][i] == "bp"){
-                cout << "P" << " ";
+                cout << "P" << " " << std::flush;
             }
         }
         cout << endl;
