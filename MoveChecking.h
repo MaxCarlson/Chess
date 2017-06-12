@@ -25,6 +25,7 @@ using namespace std;
 class MoveChecking {
 public:
     MoveChecking();
+    bool movePiece();
 
 private:
     bool properInput = false;

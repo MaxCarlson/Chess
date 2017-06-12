@@ -20,9 +20,11 @@
 
 
 MoveChecking::MoveChecking() {
-    cout << "Enter the coordinates of the piece you wish to move " << endl;
-    cout << "followed by the coordinates where you wish the piece to go" << endl;
-    cout << "ex: moving the pawn at a2 to a3 would be 'a2a3'" << endl;
+    if(turns%2 == 0){
+        cout << "Whites move." << endl;
+    } else {
+        cout << "Blacks move." << endl;
+    }
     while(properInput == false){
         cin >> moveInput;
         if(moveInput.length() != 4){
@@ -34,10 +36,6 @@ MoveChecking::MoveChecking() {
                 properInput = true;
                 b -= 1;
                 d -= 1;
-                Pieces newPiece(a, b);
-                
-                
-                
             } else {
                 cout << "Input is not on the board, please try again" << endl;
                 properInput = false;
@@ -47,6 +45,15 @@ MoveChecking::MoveChecking() {
             
         }
     }
+}
+
+bool MoveChecking::movePiece(){
+    Pieces newPiece(a, b, c, d);
+    if(newPiece.whichPiece() == true){
+        return true;
+    }
+    cout << "Improper move, Please try again" << endl;
+    return false;
 }
 
 bool MoveChecking::boardCheck(){

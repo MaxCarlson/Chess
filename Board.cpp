@@ -23,6 +23,7 @@ Board::Board() {
 
 Board::printBoard(){
     char alphabet[] = {'a','b','c','d','e','f','g','h'};
+    int counter = 8;
     //color stuff
     const HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     //print loops
@@ -34,7 +35,8 @@ Board::printBoard(){
     for(int i = 0; i < 8; i++){
         //reset console to normal color
         SetConsoleTextAttribute(hConsole, 15);        
-        cout << i+1 << " "<< std::flush;
+        cout << counter << " "<< std::flush;
+        counter -= 1;
         for (int j = 0; j < 8; j++){
             
             if(j%2 == 0){

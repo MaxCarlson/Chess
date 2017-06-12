@@ -15,6 +15,7 @@
 #define CHESSBOARD_H
 
     extern std::string boardArr [8][8];
+    extern int turns;
 
 
 

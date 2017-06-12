@@ -18,28 +18,27 @@
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>
 
-#include "Board.h"
+
 #include "chessBoard.h"
+#include "Board.h"
 
 class Pieces {
-private:
 public:
     
-    Pieces(char a, char b);
+    Pieces(char a, char b, char c, char d);
     std::string pieceToMove(char a, char b);
     std::string movePieceWhere(char c, char d);
+    bool whichPiece();
     
+private:
+    char alphabet[8] = {'a','b','c','d','e','f','g','h'};
+    int flip[8] = {7, 6, 5, 4, 3, 2, 1, 0};
+    //Piece and move coordinates
+    int x1, y1, x2, y2;
+    bool whitePawn();
+    bool blackPawn();
 };
 
-/*
-class WhitePawn: public Pieces{
-private:
-public:
-    std::string symbol = "P";
-    WhitePawn();
-    
-    
-};
-*/
+
 #endif /* PIECES_H */
 

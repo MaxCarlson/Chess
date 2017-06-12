@@ -24,8 +24,6 @@
 #include <windows.h>
 
 
-bool check = false;
-bool checkMate = false;
 
 
 
@@ -34,16 +32,42 @@ using namespace std;
 /*
  * 
  */
+bool check = false;
+bool checkMate = false;
+bool whoMove = false;
+int turns = 0;
 
+string boardArr [8][8]= {
+	{"r", "n", "b", "q", "k", "b", "n", "r"},
+	{"p", "p", "p", "p", "p", "p", "p", "p",},
+	{" ", " ", " ", " ", " ", " ", " ", " "},
+	{" ", " ", " ", " ", " ", " ", " ", " "},
+	{" ", " ", " ", " ", " ", " ", " ", " "},
+	{" ", " ", " ", " ", " ", " ", " ", " "},
+	{"P", "P", "P", "P", "P", "P", "P", "P"},
+	{"R", "N", "B", "Q", "K", "B", "N", "R"},  
+			  };
 
 
 int main(int argc, char** argv) {
     
 
     Board  newBoard;
+    cout << "Enter the coordinates of the piece you wish to move " << endl;
+    cout << "followed by the coordinates where you wish the piece to go" << endl;
+    cout << "ex: moving the pawn at a2 to a3 would be 'a2a3'" << endl;
     while(checkMate == false){
         newBoard.printBoard();
-        MoveChecking newCheck;
+        while(whoMove == false){
+            //Rudamentry move check
+            MoveChecking newCheck;
+            //figure out which piece is to be moved + move it
+            if(newCheck.movePiece() == true){
+                whoMove = true;
+            }
+        }
+        whoMove = false;
+        turns ++;
     }
 
     
