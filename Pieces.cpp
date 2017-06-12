@@ -80,7 +80,7 @@ bool Pieces::whiteRook(){
             return true;
         //going down    
         }else if(distance < 0){
-            for(int i = y1+1; i < y2-1; i++){
+            for(int i = y1+1; i <= y2-1; i++){
                 if(boardArr[i][x1] != " "){
                     return false;
                 }
@@ -89,16 +89,93 @@ bool Pieces::whiteRook(){
             boardArr[y2][x2] = "R";
             return true;
         }
+        
     //Horizontal test    
     } else if (x1 != x2 && y1 == y2){
-        
+        distance = x1-x2;
+        //going left
+        if(distance > 0){
+            for(int i = x1-1; i >= x2+1; --i){
+                if(boardArr[y1][i] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "R";
+            return true;
+            
+        //going right    
+        }else if (distance < 0){
+            for(int i = x1+1; i <= x2-1; ++i){
+                if(boardArr[y1][i] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "R";
+            return true;
+        }
     }
     
     return false;
 }
 
 bool Pieces::blackRook(){
+    int distance;
+    bool pieceOn = false;
+    //vertical only test
+    if(x1 == x2 && y1 != y2){
+        distance = y1-y2;
+        //going up 
+        if(distance > 0){
+            for(int i = y1-1; i >= y2+1; --i){
+                if(boardArr[i][x1] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "r";
+            return true;
+        //going down    
+        }else if(distance < 0){
+            for(int i = y1+1; i <= y2-1; i++){
+                if(boardArr[i][x1] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "r";
+            return true;
+        }
+        
+    //Horizontal test    
+    } else if (x1 != x2 && y1 == y2){
+        distance = x1-x2;
+        //going left
+        if(distance > 0){
+            for(int i = x1-1; i >= x2+1; --i){
+                if(boardArr[y1][i] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "r";
+            return true;
+            
+        //going right    
+        }else if (distance < 0){
+            for(int i = x1+1; i <= x2-1; ++i){
+                if(boardArr[y1][i] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "r";
+            return true;
+        }
+    }
     
+    return false;    
 }
 
 bool Pieces::whitePawn(){
