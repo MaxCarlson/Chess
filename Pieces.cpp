@@ -14,19 +14,17 @@
 #include "Pieces.h"
 
 
-Pieces::Pieces() {
+Pieces::Pieces(char a, char b) {
+    boardArr[a][b];
 
 }
 
-
-WhitePawn::WhitePawn(){
+std::string Pieces::pieceToMove(char a, char b){
     
 }
 
-BlackPawn::BlackPawn(){
+std::string movePieceWhere(char c, char d){
     
 }
 
-NoPiece::NoPiece(){
-    
-}
+

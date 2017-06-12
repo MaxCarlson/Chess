@@ -14,15 +14,18 @@
 #ifndef MOVECHECKING_H
 #define MOVECHECKING_H
 
+#include <string>
 #include <iostream>
+
+#include "Pieces.h"
+#include "chessBoard.h"
 
 using namespace std;
 
 class MoveChecking {
 public:
     MoveChecking();
-    MoveChecking(const MoveChecking& orig);
-    virtual ~MoveChecking();
+
 private:
     bool properInput = false;
     std::string moveInput;

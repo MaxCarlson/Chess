@@ -15,42 +15,10 @@
 
 
 Board::Board() {
-    //placing blank spaces
-    for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
-            boardPieces[j][i] = new NoPiece;
-            boardArr[j][i] = " ";
-        }
-        
-    }
-    //black pieces
-    for(int i = 0; i < 8; i++){
-        boardPieces[i][1] = new BlackPawn;
-        boardArr[i][1] = "bp";
-    }
-    
-    
-    //white pieces
-    for(int i = 0; i < 8; i++){
-        boardPieces[i][6] = new WhitePawn;
-        boardArr[i][6] = "wp";
-    }
-        
+       
 }
 
-Board::whiteMove(){
-        cout <<"Whites move, which piece would you like to move?" << endl;
-        cin >> piece;
-        cout <<"Where would you like to move your piece?" << endl;
-        cin >> move;
-    }
 
-Board::blackMove(){
-        cout <<"Blacks move, which piece would you like to move?" << endl;
-        cin >> piece;
-        cout <<"Where would you like to move your piece?" << endl;
-        cin >> move;
-    }
 
 
 Board::printBoard(){
@@ -83,22 +51,11 @@ Board::printBoard(){
                     SetConsoleTextAttribute(hConsole, 240);
                 }
             }
-            if(boardArr[j][i] == " "){
-                cout << " " << " " << std::flush;
-            } else if (boardArr[j][i] == "wp"){
-                cout << "wP"  << std::flush;
-            } else if (boardArr[j][i] == "bp"){
-                cout << "bP"  << std::flush;
-            }
+            cout << boardArr[i][j] << " " << std::flush;
         }
         cout << endl;
     }
     
 }
 
-Board::Board(const Board& orig) {
-}
-
-Board::~Board() {
-}
 

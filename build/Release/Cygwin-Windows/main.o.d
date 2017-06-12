@@ -1,5 +1,8 @@
-build/Release/Cygwin-Windows/main.o: main.cpp Board.h Pieces.h
+build/Release/Cygwin-Windows/main.o: main.cpp Board.h Pieces.h \
+ MoveChecking.h
 
 Board.h:
 
 Pieces.h:
+
+MoveChecking.h:

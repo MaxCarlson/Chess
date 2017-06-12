@@ -18,6 +18,7 @@
 #include <windows.h>
 
 #include "Pieces.h"
+#include "chessBoard.h"
 
 using namespace std;
 
@@ -27,16 +28,21 @@ private:
     
 public:
     Board();
-    Board(const Board& orig);
-    virtual ~Board();
-    
-    Pieces* boardPieces[8][8];
-    string boardArr[8][8];
-    string move, piece;
+
+
+    string boardArr [8][8]= {
+	{"r", "n", "b", "q", "k", "b", "n", "r"},
+	{"p", "p", "p", "p", "p", "p", "p", "p",},
+	{" ", " ", " ", " ", " ", " ", " ", " "},
+	{" ", " ", " ", " ", " ", " ", " ", " "},
+	{" ", " ", " ", " ", " ", " ", " ", " "},
+	{" ", " ", " ", " ", " ", " ", " ", " "},
+	{"P", "P", "P", "P", "P", "P", "P", "P"},
+	{"R", "N", "B", "Q", "K", "B", "N", "R"},  
+			  };
     
     printBoard();
-    whiteMove();
-    blackMove();
+
 
 };
 

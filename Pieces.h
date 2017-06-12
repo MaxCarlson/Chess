@@ -18,42 +18,28 @@
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>
 
+#include "Board.h"
+#include "chessBoard.h"
+
 class Pieces {
 private:
 public:
-    std::string symbol = " ";
-    Pieces();
     
-
+    Pieces(char a, char b);
+    std::string pieceToMove(char a, char b);
+    std::string movePieceWhere(char c, char d);
     
 };
 
-
+/*
 class WhitePawn: public Pieces{
 private:
 public:
-    std::string symbol = "wp";
+    std::string symbol = "P";
     WhitePawn();
     
     
 };
-
-class BlackPawn: public Pieces{
-private:
-public:
-    std::string symbol = "bp";
-    BlackPawn();
-    
-    
-};
-
-
-class NoPiece: public Pieces{
-private:
-public:
-    std::string symbol = " ";
-    NoPiece();
-    
-};
+*/
 #endif /* PIECES_H */
 
