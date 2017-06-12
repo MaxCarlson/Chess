@@ -33,6 +33,11 @@ public:
 private:
     char alphabet[8] = {'a','b','c','d','e','f','g','h'};
     int flip[8] = {7, 6, 5, 4, 3, 2, 1, 0};
+    
+    //arrays for checking friendly fire
+    std::string blackPieces[6] = {"p", "q", "k", "b", "n", "r"};
+    std::string whitePieces[6] = {"P", "Q", "K", "B", "N", "R"};
+    
     //Piece and move coordinates
     int x1, y1, x2, y2;
     bool whitePawn();

@@ -34,6 +34,20 @@ Pieces::Pieces(char a,char b, char c, char d) {
 }
 
 bool Pieces::whichPiece(){
+    //friendly check
+    if(turns%2==0){
+        for(int i = 0; i < 6; i++){
+            if(boardArr[y2][x2] == whitePieces[i]){
+                return false;
+            }
+        }
+    } else if(turns % 2 == 1){
+        for(int i = 0; i < 6; i++){
+            if(boardArr[y2][x2] == blackPieces[i]){
+                return false;
+            }
+        }
+    }
     //find which piece to move
     if(boardArr[y1][x1] == "P" && turns%2 == 0){
         whitePawn();
@@ -66,8 +80,18 @@ bool Pieces::whiteRook(){
             return true;
         //going down    
         }else if(distance < 0){
-            
+            for(int i = y1+1; i < y2-1; i++){
+                if(boardArr[i][x1] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "R";
+            return true;
         }
+    //Horizontal test    
+    } else if (x1 != x2 && y1 == y2){
+        
     }
     
     return false;
