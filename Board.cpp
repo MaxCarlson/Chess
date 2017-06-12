@@ -35,8 +35,9 @@ Board::printBoard(){
     for(int i = 0; i < 8; i++){
         //reset console to normal color
         SetConsoleTextAttribute(hConsole, 15);        
-        cout << counter << " "<< std::flush;
-        counter -= 1;
+        //cout << counter << " "<< std::flush;
+        //counter -= 1;
+        cout << i << " "<< std::flush;
         for (int j = 0; j < 8; j++){
             
             if(j%2 == 0){

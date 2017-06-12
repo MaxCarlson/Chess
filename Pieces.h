@@ -37,6 +37,8 @@ private:
     int x1, y1, x2, y2;
     bool whitePawn();
     bool blackPawn();
+    bool whiteRook();
+    bool blackRook();
 };
 
 
