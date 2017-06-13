@@ -60,6 +60,8 @@ bool Pieces::whichPiece(){
             whiteKnight();
         } else if(boardArr[y1][x1] == "B"){
             whiteBishop();
+        } else if(boardArr[y1][x1] == "Q"){
+            whiteQueen();
         }
     //black pieces    
     }else if (turns % 2 == 1) {
@@ -71,6 +73,8 @@ bool Pieces::whichPiece(){
             blackKnight();
         }else if(boardArr[y1][x1] == "b"){
             blackBishop();
+        }else if(boardArr[y1][x1] == "q"){
+            blackQueen();
         }
     }
     
@@ -78,7 +82,251 @@ bool Pieces::whichPiece(){
     
     
 }
+
 // Test if moves are valid + move piece + take piece
+
+bool Pieces::whiteQueen(){
+    //only perfect diagonal check
+    int diag = abs(x1-x2);
+    int diag1 = abs(y1-y2);
+    
+    if(diag == diag1){
+        //up right
+        if(y1-y2 > 0 && x1-x2 < 0){
+            int j = x1+1;
+            for(int i = y1-1; i >= y2+1; i--){
+                if(boardArr[i][j] != " "){
+                    return false;
+                }
+                j ++;
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "Q";
+            return true;
+
+        //up left    
+        } else if(y1-y2 > 0 && x1-x2 > 0){
+            int j = x1-1;
+            for(int i = y1-1; i >= y2+1; i--){
+                if(boardArr[i][j] != " "){
+                    return false;
+                }
+                j --;
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "Q";
+            return true;
+
+        //down left    
+        }else if(y1-y2 < 0 && x1-x2 > 0){
+            int j = x1-1;
+            for(int i = y1+1; i <= y2-1; i++){
+                if(boardArr[i][j] != " "){
+                    return false;
+                }
+                j --;
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "Q";
+            return true;
+
+        //down right    
+        } else if(y1-y2 < 0 && x1-x2 < 0){
+            int j = x1+1;
+            for(int i = y1+1; i <= y2-1; i++){
+                if(boardArr[i][j] != " "){
+                    return false;
+                }
+                j ++;
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "Q"
+                    "";
+            return true;
+        }   
+    } else {
+        int distance;
+        
+        //going up
+        if(x1 == x2 && y1 != y2){
+            distance = y1-y2;
+             
+            if(distance > 0){
+                for(int i = y1-1; i >= y2+1; --i){
+                    if(boardArr[i][x1] != " "){
+                        return false;
+                    }
+                }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "Q";
+            return true;
+        //going down    
+        }else if(distance < 0){
+            for(int i = y1+1; i <= y2-1; i++){
+                if(boardArr[i][x1] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "Q";
+            return true;
+        }
+        
+        //Horizontal test    
+        } else if (x1 != x2 && y1 == y2){
+            distance = x1-x2;
+            //going left
+            if(distance > 0){
+                for(int i = x1-1; i >= x2+1; --i){
+                    if(boardArr[y1][i] != " "){
+                        return false;
+                    }
+                }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "Q";
+            return true;
+
+            //going right    
+        }else if (distance < 0){
+            for(int i = x1+1; i <= x2-1; ++i){
+                if(boardArr[y1][i] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "Q";
+            return true;
+            }
+        }
+        
+    }
+
+return false;
+
+}
+
+bool Pieces::blackQueen(){
+    //only perfect diagonal check
+    int diag = abs(x1-x2);
+    int diag1 = abs(y1-y2);
+    
+    if(diag == diag1){
+        //up right
+        if(y1-y2 > 0 && x1-x2 < 0){
+            int j = x1+1;
+            for(int i = y1-1; i >= y2+1; i--){
+                if(boardArr[i][j] != " "){
+                    return false;
+                }
+                j ++;
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "q";
+            return true;
+
+        //up left    
+        } else if(y1-y2 > 0 && x1-x2 > 0){
+            int j = x1-1;
+            for(int i = y1-1; i >= y2+1; i--){
+                if(boardArr[i][j] != " "){
+                    return false;
+                }
+                j --;
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "q";
+            return true;
+
+        //down left    
+        }else if(y1-y2 < 0 && x1-x2 > 0){
+            int j = x1-1;
+            for(int i = y1+1; i <= y2-1; i++){
+                if(boardArr[i][j] != " "){
+                    return false;
+                }
+                j --;
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "q";
+            return true;
+
+        //down right    
+        } else if(y1-y2 < 0 && x1-x2 < 0){
+            int j = x1+1;
+            for(int i = y1+1; i <= y2-1; i++){
+                if(boardArr[i][j] != " "){
+                    return false;
+                }
+                j ++;
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "q"
+                    "";
+            return true;
+        }   
+    } else {
+        int distance;
+        
+        //going up
+        if(x1 == x2 && y1 != y2){
+            distance = y1-y2;
+             
+            if(distance > 0){
+                for(int i = y1-1; i >= y2+1; --i){
+                    if(boardArr[i][x1] != " "){
+                        return false;
+                    }
+                }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "q";
+            return true;
+        //going down    
+        }else if(distance < 0){
+            for(int i = y1+1; i <= y2-1; i++){
+                if(boardArr[i][x1] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "q";
+            return true;
+        }
+        
+        //Horizontal test    
+        } else if (x1 != x2 && y1 == y2){
+            distance = x1-x2;
+            //going left
+            if(distance > 0){
+                for(int i = x1-1; i >= x2+1; --i){
+                    if(boardArr[y1][i] != " "){
+                        return false;
+                    }
+                }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "q";
+            return true;
+
+            //going right    
+        }else if (distance < 0){
+            for(int i = x1+1; i <= x2-1; ++i){
+                if(boardArr[y1][i] != " "){
+                    return false;
+                }
+            }
+            boardArr[y1][x1] = " ";
+            boardArr[y2][x2] = "q";
+            return true;
+            }
+        }
+        
+    }
+
+return false;
+    
+}
+
+
+
 bool Pieces::whiteBishop(){
     //only perfect diagonal check
     int diag = abs(x1-x2);
@@ -87,8 +335,7 @@ bool Pieces::whiteBishop(){
     if(diag != diag1){
         return false;
     }
-    
-    
+
     //up right
     if(y1-y2 > 0 && x1-x2 < 0){
         int j = x1+1;
@@ -101,22 +348,113 @@ bool Pieces::whiteBishop(){
         boardArr[y1][x1] = " ";
         boardArr[y2][x2] = "B";
         return true;
-    //up left    
-    } else if(y1-y1 > 0 && x1-x2 > 0){
         
+    //up left    
+    } else if(y1-y2 > 0 && x1-x2 > 0){
+        int j = x1-1;
+        for(int i = y1-1; i >= y2+1; i--){
+            if(boardArr[i][j] != " "){
+                return false;
+            }
+            j --;
+        }
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "B";
+        return true;
+        
+    //down left    
+    }else if(y1-y2 < 0 && x1-x2 > 0){
+        int j = x1-1;
+        for(int i = y1+1; i <= y2-1; i++){
+            if(boardArr[i][j] != " "){
+                return false;
+            }
+            j --;
+        }
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "B";
+        return true;
+        
+    //down right    
+    } else if(y1-y2 < 0 && x1-x2 < 0){
+        int j = x1+1;
+        for(int i = y1+1; i <= y2-1; i++){
+            if(boardArr[i][j] != " "){
+                return false;
+            }
+            j ++;
+        }
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "B";
+        return true;
     }
-    
-    
-    
-    //down left
-    
-    //down right
-    
+
     return false;
 }
 
 bool Pieces::blackBishop(){
+    //only perfect diagonal check
+    int diag = abs(x1-x2);
+    int diag1 = abs(y1-y2);
     
+    if(diag != diag1){
+        return false;
+    }
+
+    //up right
+    if(y1-y2 > 0 && x1-x2 < 0){
+        int j = x1+1;
+        for(int i = y1-1; i >= y2+1; i--){
+            if(boardArr[i][j] != " "){
+                return false;
+            }
+            j ++;
+        }
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "b";
+        return true;
+        
+    //up left    
+    } else if(y1-y2 > 0 && x1-x2 > 0){
+        int j = x1-1;
+        for(int i = y1-1; i >= y2+1; i--){
+            if(boardArr[i][j] != " "){
+                return false;
+            }
+            j --;
+        }
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "b";
+        return true;
+        
+    //down left    
+    }else if(y1-y2 < 0 && x1-x2 > 0){
+        int j = x1-1;
+        for(int i = y1+1; i <= y2-1; i++){
+            if(boardArr[i][j] != " "){
+                return false;
+            }
+            j --;
+        }
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "b";
+        return true;
+        
+    //down right    
+    } else if(y1-y2 < 0 && x1-x2 < 0){
+        int j = x1+1;
+        for(int i = y1+1; i <= y2-1; i++){
+            if(boardArr[i][j] != " "){
+                return false;
+            }
+            j ++;
+        }
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "b";
+        return true;
+    }
+
+    return false;    
 }
 
 bool Pieces::whiteKnight(){
