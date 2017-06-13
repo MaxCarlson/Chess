@@ -105,7 +105,7 @@ bool Pieces::isWhiteKingSafe(){
                 whiteSafe[i-1][j-1] = false;
             }else if(boardArr[i][j] == "r"){
                 verticalM(j, i);
-                horizontalM();
+                horizontalM(j, i);
             }
         }
     }
@@ -117,7 +117,7 @@ void Pieces::verticalM(int x, int y){
     }
 }
 
-void horizontalM(){
+void Pieces::horizontalM(int x, int y){
     
 }
 
