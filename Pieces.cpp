@@ -82,7 +82,7 @@ bool Pieces::whichPiece(){
     
     
 }
-
+//NEED add castling
 // Test if moves are valid + move piece + take piece
 
 bool Pieces::whiteQueen(){
@@ -664,7 +664,7 @@ bool Pieces::blackRook(){
 
 bool Pieces::whitePawn(){
     //pawn first turn
-    if(boardArr[y2][x2] == " " && y1-y2 <= 2 && y1-y2 > 0 && x1 == x2 && turns == 0){
+    if(boardArr[y2][x2] == " " && y1-y2 <= 2 && y1-y2 > 0 && x1 == x2 && y1 == 6){
         boardArr[y1][x1] = " ";
         boardArr[y2][x2] = "P";
         return true;
@@ -685,7 +685,7 @@ bool Pieces::whitePawn(){
 
 bool Pieces::blackPawn(){
     //pawn first turn
-    if(boardArr[y2][x2] == " " && y2-y1 <= 2 && y2-y1 > 0 && x1 == x2 && turns == 1){
+    if(boardArr[y2][x2] == " " && y2-y1 <= 2 && y2-y1 > 0 && x1 == x2 && y1 == 1){
         boardArr[y1][x1] = " ";
         boardArr[y2][x2] = "p";
         return true;

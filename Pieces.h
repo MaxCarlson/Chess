@@ -38,7 +38,8 @@ private:
     std::string blackPieces[6] = {"p", "q", "k", "b", "n", "r"};
     std::string whitePieces[6] = {"P", "Q", "K", "B", "N", "R"};
     
-    // arrays for white and black lines of attack for king
+    // kings safe checking + arrays for white and black lines of attack for king
+    bool isKingSafe();
     
     bool whiteLoa[8][8];
     bool blackLoa[8][8];
@@ -50,8 +51,8 @@ private:
     bool whiteRook();
     bool whiteKnight();
     bool whiteBishop();
-    
     bool whiteQueen();
+    
     bool whiteKing();
     
     //black pieces
@@ -59,8 +60,8 @@ private:
     bool blackRook();
     bool blackKnight();
     bool blackBishop();
-    
     bool blackQueen();
+    
     bool blackKing();
 };
 

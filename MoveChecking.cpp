@@ -59,7 +59,7 @@ bool MoveChecking::movePiece(){
 bool MoveChecking::boardCheck(){
     //checks for variables a,b,c,d to insure coordinates given are on the board
     if(a == 'a' || a == 'b' || a == 'c' || a == 'd' || a == 'e' || a == 'f' || a == 'g'|| a == 'h') {
-        if(b-'0' > 0 && (int)b-'0' < 9) {
+        if(b-'0' > 0 && b-'0' < 9) {
             if(c == 'a' || c == 'b' || c == 'c' || c == 'd' || c == 'e' || c == 'f' || c == 'g' || c == 'h') {
                 if(d-'0' > 0 && d-'0' < 9) {   
                 } else {
