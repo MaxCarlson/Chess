@@ -37,6 +37,10 @@ bool checkMate = false;
 bool whoMove = false;
 int turns = 0;
 
+bool whiteSafe[8][8];
+bool blackSafe[8][8];
+
+
 string boardArr [8][8]= {
 	{"r", "n", "b", "q", "k", "b", "n", "r"},
 	{"p", "p", "p", "p", "p", "p", "p", "p",},
@@ -51,6 +55,13 @@ string boardArr [8][8]= {
 
 int main(int argc, char** argv) {
     
+    //setting safety arrays to all true
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            whiteSafe[i][j] = true;
+            blackSafe[i][j] = true;
+        }
+    }
 
     Board  newBoard;
     cout << "Enter the coordinates of the piece you wish to move " << endl;

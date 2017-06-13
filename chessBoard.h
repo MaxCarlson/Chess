@@ -13,9 +13,13 @@
 
 #ifndef CHESSBOARD_H
 #define CHESSBOARD_H
-
+    //array of entire board
     extern std::string boardArr [8][8];
     extern int turns;
+    
+    //arrays of kings safety boards
+    extern bool whiteSafe[8][8];
+    extern bool blackSafe[8][8];
 
 
 

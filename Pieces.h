@@ -42,14 +42,18 @@ private:
     bool isWhiteKingSafe();
     bool isBlackKingSafe();
     
-    bool whiteSafe[8][8];
-    bool blackSafe[8][8];
+
+    
+    //NEEED STILL
+    bool canWhiteKingMoveThere();
+    bool canBlackKingMoveThere();
     
     //Movement safe functions for marking board unsafe
-    void verticalM(int x, int y);
-    void horizontalM(int x, int y);
-    void diagonalM(int x, int y);
-    void knightM(int x, int y);
+    void upDownLeftRightM(int x, int y, char wb);
+    void diagonalM(int x, int y, char wb);
+    void knightM(int x, int y, char wb);
+    
+    void whiteOrBlack(int x, int y, char wb);
     
     //Piece and move coordinates
     bool whiteKingMoved = false;
