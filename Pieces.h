@@ -26,8 +26,7 @@ class Pieces {
 public:
     
     Pieces(char a, char b, char c, char d);
-    std::string pieceToMove(char a, char b);
-    std::string movePieceWhere(char c, char d);
+    
     bool whichPiece();
     
 private:
@@ -35,17 +34,28 @@ private:
     int flip[8] = {7, 6, 5, 4, 3, 2, 1, 0};
     
     //arrays for checking friendly fire
-    std::string blackPieces[6] = {"p", "q", "k", "b", "n", "r"};
-    std::string whitePieces[6] = {"P", "Q", "K", "B", "N", "R"};
+    std::string blackPieces[7] = {"p", "q", "k", "b", "n", "r", " "};
+    std::string whitePieces[7] = {"P", "Q", "K", "B", "N", "R", " "};
     
     // kings safe checking + arrays for white and black lines of attack for king
-    bool isKingSafe();
     
-    bool whiteLoa[8][8];
-    bool blackLoa[8][8];
+    bool isWhiteKingSafe();
+    bool isBlackKingSafe();
+    
+    bool whiteSafe[8][8];
+    bool blackSafe[8][8];
+    
+    //Movement safe functions for marking board unsafe
+    void verticalM(int x, int y);
+    void horizontalM(int x, int y);
+    void diagonalM(int x, int y);
+    void knightM(int x, int y);
     
     //Piece and move coordinates
+    bool whiteKingMoved = false;
+    bool blackKingMoved = false;
     int x1, y1, x2, y2;
+    
     //white pieces
     bool whitePawn();
     bool whiteRook();

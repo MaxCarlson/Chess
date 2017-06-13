@@ -49,6 +49,8 @@ bool Pieces::whichPiece(){
         }
     }
     
+    ////////KINGS IS SAFE CHECK
+    
     //find which piece to move
     //white pieces
     if(turns % 2 == 0){
@@ -62,6 +64,11 @@ bool Pieces::whichPiece(){
             whiteBishop();
         } else if(boardArr[y1][x1] == "Q"){
             whiteQueen();
+        }else if(boardArr[y1][x1] == "K"){
+            if(whiteKing() == true){
+                whiteKingMoved = true;
+                return true;
+            }
         }
     //black pieces    
     }else if (turns % 2 == 1) {
@@ -75,6 +82,11 @@ bool Pieces::whichPiece(){
             blackBishop();
         }else if(boardArr[y1][x1] == "q"){
             blackQueen();
+        }else if(boardArr[y1][x1] == "k"){
+            if(blackKing() == true){
+                blackKingMoved = true;
+                return true;
+            }
         }
     }
     
@@ -83,7 +95,89 @@ bool Pieces::whichPiece(){
     
 }
 //NEED add castling
+//Need En Passant
+bool Pieces::isWhiteKingSafe(){
+    //array loop to mark board of unsafe areas
+    for(int i = 0; i < 8; i++){
+        for (int j = 0; j < 8; j++){
+            if(boardArr[i][j] == "p"){
+                whiteSafe[i-1][j+1] = false;
+                whiteSafe[i-1][j-1] = false;
+            }else if(boardArr[i][j] == "r"){
+                verticalM(j, i);
+                horizontalM();
+            }
+        }
+    }
+}
+
+void Pieces::verticalM(int x, int y){
+    for(int i = 0; i < 8; i++){
+        
+    }
+}
+
+void horizontalM(){
+    
+}
+
 // Test if moves are valid + move piece + take piece
+bool Pieces::whiteKing(){
+    //king is safe after move check
+    
+    
+    //up
+    if(y1-y2 == 1 && x1 == x2){
+        for(int i = 0; i < 7; i++){
+            if(boardArr[y2][x2] == blackPieces[i]){
+                boardArr[y1][x1] = " ";
+                boardArr[y2][x2] = "K";
+                return true;
+            }
+        }
+        
+    //down    
+    } else if(boardArr[y2][x2] == " " && y2-y1 == 1 && x1 == x2){
+        for(int i = 0; i < 7; i++){
+            if(boardArr[y2][x2] == blackPieces[i]){
+                boardArr[y1][x1] = " ";
+                boardArr[y2][x2] = "K";
+                return true;
+            }
+        }
+        
+    //right    
+    } else if(boardArr[y2][x2] == " " && y1 == y2 && x2-x1 == 1){
+        for(int i = 0; i < 7; i++){
+            if(boardArr[y2][x2] == blackPieces[i]){
+                boardArr[y1][x1] = " ";
+                boardArr[y2][x2] = "K";
+                return true;
+            }
+        }
+        
+    //left    
+    } else if(boardArr[y2][x2] == " " && y1 == y2 && x1-x2 == 1){
+        for(int i = 0; i < 7; i++){
+            if(boardArr[y2][x2] == blackPieces[i]){
+                boardArr[y1][x1] = " ";
+                boardArr[y2][x2] = "K";
+                return true;
+            }
+        }
+    }
+    
+    //castle
+    if(whiteKingMoved == false){
+        
+    }
+    
+    return false;
+}
+
+bool Pieces::blackKing(){
+    
+}
 
 bool Pieces::whiteQueen(){
     //only perfect diagonal check
