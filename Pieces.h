@@ -44,6 +44,8 @@ private:
     bool blackPawn();
     bool whiteRook();
     bool blackRook();
+    bool whiteKnight();
+    bool blackKnight();
 };
 
 

@@ -48,18 +48,120 @@ bool Pieces::whichPiece(){
             }
         }
     }
+    
     //find which piece to move
-    if(boardArr[y1][x1] == "P" && turns%2 == 0){
-        whitePawn();
-    }else if(boardArr[y1][x1] == "p" && turns%2 == 1){
-        blackPawn();
-    }else if(boardArr[y1][x1] == "R" && turns%2 == 0){
-        whiteRook();
-    }else if(boardArr[y1][x1] == "r" && turns%2 == 1){
-        blackRook();
+    //white pieces
+    if(turns % 2 == 0){
+        if(boardArr[y1][x1] == "P"){
+            whitePawn();
+        }else if(boardArr[y1][x1] == "R"){
+            whiteRook();
+        }else if(boardArr[y1][x1] == "N"){
+            whiteKnight();
+        }
+    //black pieces    
+    }else if (turns % 2 == 1) {
+        if(boardArr[y1][x1] == "p"){
+            blackPawn();
+        }else if(boardArr[y1][x1] == "r"){
+            blackRook();
+        } else if(boardArr[y1][x1] == "n"){
+            blackKnight();
+        }
     }
+    
+    
+    
+    
 }
 // Test if moves are valid + move piece + take piece
+bool Pieces::whiteKnight(){
+    //up left
+    if(x1-2 == x2 && y1-1 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "N";
+        return true;
+    } else if(x1-1 == x2 && y1-2 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "N";
+        return true;
+    }
+    //up right
+    if(x1+2 == x2 && y1-1 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "N";
+        return true;
+    } else if(x1+1 == x2 && y1-2 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "N";
+        return true;
+    }
+    //down left
+    if(x1-2 == x2 && y1+1 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "N";
+        return true;
+    } else if(x1-1 == x2 && y1+2 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "N";
+        return true;
+    }
+    //down right
+    if(x1+2 == x2 && y1+1 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "N";
+        return true;
+    } else if(x1+1 == x2 && y1+2 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "N";
+        return true;
+    }
+    return false;
+}
+
+bool Pieces::blackKnight(){
+    //up left
+    if(x1-2 == x2 && y1-1 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "n";
+        return true;
+    } else if(x1-1 == x2 && y1-2 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "n";
+        return true;
+    }
+    //up right
+    if(x1+2 == x2 && y1-1 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "n";
+        return true;
+    } else if(x1+1 == x2 && y1-2 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "n";
+        return true;
+    }
+    //down left
+    if(x1-2 == x2 && y1+1 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "n";
+        return true;
+    } else if(x1-1 == x2 && y1+2 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "n";
+        return true;
+    }
+    //down right
+    if(x1+2 == x2 && y1+1 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "n";
+        return true;
+    } else if(x1+1 == x2 && y1+2 == y2){
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "n";
+        return true;
+    }
+    return false;
+}    
 
 
 bool Pieces::whiteRook(){
