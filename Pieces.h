@@ -38,14 +38,30 @@ private:
     std::string blackPieces[6] = {"p", "q", "k", "b", "n", "r"};
     std::string whitePieces[6] = {"P", "Q", "K", "B", "N", "R"};
     
+    // arrays for white and black lines of attack for king
+    
+    bool whiteLoa[8][8];
+    bool blackLoa[8][8];
+    
     //Piece and move coordinates
     int x1, y1, x2, y2;
+    //white pieces
     bool whitePawn();
-    bool blackPawn();
     bool whiteRook();
-    bool blackRook();
     bool whiteKnight();
+    bool whiteBishop();
+    
+    bool whiteQueen();
+    bool whiteKing();
+    
+    //black pieces
+    bool blackPawn();
+    bool blackRook();
     bool blackKnight();
+    bool blackBishop();
+    
+    bool blackQueen();
+    bool blackKing();
 };
 
 

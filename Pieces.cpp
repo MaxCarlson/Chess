@@ -58,6 +58,8 @@ bool Pieces::whichPiece(){
             whiteRook();
         }else if(boardArr[y1][x1] == "N"){
             whiteKnight();
+        } else if(boardArr[y1][x1] == "B"){
+            whiteBishop();
         }
     //black pieces    
     }else if (turns % 2 == 1) {
@@ -67,6 +69,8 @@ bool Pieces::whichPiece(){
             blackRook();
         } else if(boardArr[y1][x1] == "n"){
             blackKnight();
+        }else if(boardArr[y1][x1] == "b"){
+            blackBishop();
         }
     }
     
@@ -75,6 +79,46 @@ bool Pieces::whichPiece(){
     
 }
 // Test if moves are valid + move piece + take piece
+bool Pieces::whiteBishop(){
+    //only perfect diagonal check
+    int diag = abs(x1-x2);
+    int diag1 = abs(y1-y2);
+    
+    if(diag != diag1){
+        return false;
+    }
+    
+    
+    //up right
+    if(y1-y2 > 0 && x1-x2 < 0){
+        int j = x1+1;
+        for(int i = y1-1; i >= y2+1; i--){
+            if(boardArr[i][j] != " "){
+                return false;
+            }
+            j ++;
+        }
+        boardArr[y1][x1] = " ";
+        boardArr[y2][x2] = "B";
+        return true;
+    //up left    
+    } else if(y1-y1 > 0 && x1-x2 > 0){
+        
+    }
+    
+    
+    
+    //down left
+    
+    //down right
+    
+    return false;
+}
+
+bool Pieces::blackBishop(){
+    
+}
+
 bool Pieces::whiteKnight(){
     //up left
     if(x1-2 == x2 && y1-1 == y2){
