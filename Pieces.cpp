@@ -118,7 +118,7 @@ bool Pieces::isWhiteKingSafe(){
     for(int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             if(boardArr[i][j] == "p"){
-                //sanity checks
+                //pawn sanity checks
                 if(i < 7 && j < 7){
                     whiteSafe[i+1][j+1] = false;
                 } else if (i < 7 && j > 0){
@@ -133,7 +133,7 @@ bool Pieces::isWhiteKingSafe(){
             } else if (boardArr[i][j] == "q"){
                 diagonalM(j, i, w);
                 upDownLeftRightM(j, i, w);
-            }else if (boardArr[j][i]== "k"){
+            }else if (boardArr[i][j] == "k"){
                 kingM(j, i, w);
             }
         }
@@ -144,13 +144,13 @@ bool Pieces::isWhiteKingSafe(){
 
 
 bool Pieces::isBlackKingSafe(){
-//denoting we're marking whites un-safe areas
+//denoting we're marking blacks un-safe areas
     char w = 'b';
     //array loop to mark board of unsafe areas
     for(int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             if(boardArr[i][j] == "P"){
-                //sanity checks 
+                //pawn sanity checks 
                 if(i > 0 && j<7){
                     blackSafe[i-1][j+1] = false;    
                 } else if(i > 0 && j > 0){
@@ -198,45 +198,57 @@ bool Pieces::sanityCheck(int x, int y){
 void Pieces::upDownLeftRightM(int x, int y, char wb){
     //mark up unsafe
     for(int i = y-1; i > -1; i--){
-        if(boardArr[i][x] != " "){
-            whiteOrBlack(x,i,wb);
-            break;
+        //sanity checks
+        if(sanityCheck(x, i) == true){
+            if(boardArr[i][x] != " "){
+                whiteOrBlack(x,i,wb);
+                break;
+            }
+            whiteOrBlack(x,i,wb);            
         }
-        whiteOrBlack(x,i,wb);
+
     }
     //mark down
     for(int i = y+1; i < 8; i++){
-        if(boardArr[i][x] != " "){
-            whiteOrBlack(x,i,wb);
-            break;
+        if(sanityCheck(x, i) == true){
+            if(boardArr[i][x] != " "){
+                whiteOrBlack(x,i,wb);
+                break;
+            }
+            whiteOrBlack(x,i,wb);            
         }
-        whiteOrBlack(x,i,wb);
+
     }
     
     //mark right unsafe
     for(int i = x+1; i < 8; i++){
-        if(boardArr[y][i] != " "){
-            whiteOrBlack(i,y,wb);
-            break;
+        if(sanityCheck(i, y) == true){
+            if(boardArr[y][i] != " "){
+                whiteOrBlack(i,y,wb);
+                break;
+            }
+            whiteOrBlack(i,y,wb);            
         }
-        whiteOrBlack(i,y,wb);
+
     }
     
     //mark left
     for(int i = x-1; i > -1; i--){
-        if(boardArr[y][i] != " "){
+        if(sanityCheck(i, y) == true){
+            if(boardArr[y][i] != " "){
+                whiteOrBlack(i,y,wb);
+                break;
+            }
             whiteOrBlack(i,y,wb);
-            break;
         }
-        whiteOrBlack(i,y,wb);
+
     }    
 }
 void Pieces::diagonalM(int x, int y, char wb){
-    int j = y-1;
-    //sanity check
-    
+    int j = y-1; 
     //up right safety check
     for(int i = x+1; i < 8; i++){
+        //sanity checks
         if(sanityCheck(i, j) == true){
             if(boardArr[j][i] != " "){
                 whiteOrBlack(i,j,wb);
@@ -246,11 +258,9 @@ void Pieces::diagonalM(int x, int y, char wb){
         }
         j --;
     }  
-    
- 
+     
     //down right
     j = y+1;
-    
     for(int i = x+1; i < 8; i++){
         if(sanityCheck(i, j) == true){
             if(boardArr[j][i] != " "){
@@ -262,10 +272,8 @@ void Pieces::diagonalM(int x, int y, char wb){
         j ++;
     }        
     
-
     //down left
     j = y+1;
-    
     for(int i = x-1; i > -1; i--){
         if(sanityCheck(i, j) == true){
             if(boardArr[j][i] != " "){
@@ -277,10 +285,8 @@ void Pieces::diagonalM(int x, int y, char wb){
         j ++;
     }        
     
-
     //up left
     j = y-1;
-    
     for(int i = x-1; i > -1; i--){
         if(sanityCheck(i, j) == true){
             if(boardArr[j][i] != " "){
@@ -291,8 +297,6 @@ void Pieces::diagonalM(int x, int y, char wb){
         }
         j --;
     }        
-    
-
 }
 
 void Pieces::knightM(int x, int y, char wb){
