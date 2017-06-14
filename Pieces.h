@@ -54,6 +54,8 @@ private:
     void knightM(int x, int y, char wb);
     void kingM(int x, int y, char wb);
     
+    bool sanityCheck(int x, int y);
+    
     //small check for king safety to re-use indiscriminate of color
     void whiteOrBlack(int x, int y, char wb);
     

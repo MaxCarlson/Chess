@@ -52,10 +52,19 @@ bool Pieces::whichPiece(){
         }
     }
     
+    //setting king safety arrays to all true
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            whiteSafe[i][j] = true;
+            blackSafe[i][j] = true;
+        }
+    }
+    
     ////////KINGS IS SAFE CHECK 
     isWhiteKingSafe();
-    isBlackKingSafe();  //DELETES 0,0 black rook
+    isBlackKingSafe();  
     //find which piece to move
+    
     //white pieces
     if(turns % 2 == 0){
         if(boardArr[y1][x1] == "P"){
@@ -110,10 +119,10 @@ bool Pieces::isWhiteKingSafe(){
         for (int j = 0; j < 8; j++){
             if(boardArr[i][j] == "p"){
                 //sanity checks
-                if(i > 0 && j < 7){
-                    whiteSafe[i-1][j+1] = false;
-                } else if (i > 0 && j > 0){
-                    whiteSafe[i-1][j-1] = false;
+                if(i < 7 && j < 7){
+                    whiteSafe[i+1][j+1] = false;
+                } else if (i < 7 && j > 0){
+                    whiteSafe[i+1][j-1] = false;
                 }
             }else if(boardArr[i][j] == "r"){
                 upDownLeftRightM(j, i, w);    
@@ -142,10 +151,10 @@ bool Pieces::isBlackKingSafe(){
         for (int j = 0; j < 8; j++){
             if(boardArr[i][j] == "P"){
                 //sanity checks 
-                if(i < 7 && j<7){
-                    blackSafe[i+1][j+1] = false;    
-                } else if(i < 7 && j > 0){
-                    blackSafe[i+1][j-1] = false;
+                if(i > 0 && j<7){
+                    blackSafe[i-1][j+1] = false;    
+                } else if(i > 0 && j > 0){
+                    blackSafe[i-1][j-1] = false;
                 }
             }else if(boardArr[i][j] == "R"){
                 upDownLeftRightM(j, i, w);    
@@ -177,9 +186,18 @@ void Pieces::whiteOrBlack(int x, int y, char wb){
     }
 }
 
+bool Pieces::sanityCheck(int x, int y){
+    if(x > 7 || x < 0){
+        return false;
+    }else if(y > 7 || y < 0){
+        return false;
+    }
+    return true;
+}
+
 void Pieces::upDownLeftRightM(int x, int y, char wb){
     //mark up unsafe
-    for(int i = y; i > -1; i--){
+    for(int i = y-1; i > -1; i--){
         if(boardArr[i][x] != " "){
             whiteOrBlack(x,i,wb);
             break;
@@ -187,7 +205,7 @@ void Pieces::upDownLeftRightM(int x, int y, char wb){
         whiteOrBlack(x,i,wb);
     }
     //mark down
-    for(int i = y; i < 8; i++){
+    for(int i = y+1; i < 8; i++){
         if(boardArr[i][x] != " "){
             whiteOrBlack(x,i,wb);
             break;
@@ -196,7 +214,7 @@ void Pieces::upDownLeftRightM(int x, int y, char wb){
     }
     
     //mark right unsafe
-    for(int i = x; i < 8; i++){
+    for(int i = x+1; i < 8; i++){
         if(boardArr[y][i] != " "){
             whiteOrBlack(i,y,wb);
             break;
@@ -205,7 +223,7 @@ void Pieces::upDownLeftRightM(int x, int y, char wb){
     }
     
     //mark left
-    for(int i = x; i > -1; i--){
+    for(int i = x-1; i > -1; i--){
         if(boardArr[y][i] != " "){
             whiteOrBlack(i,y,wb);
             break;
@@ -214,43 +232,67 @@ void Pieces::upDownLeftRightM(int x, int y, char wb){
     }    
 }
 void Pieces::diagonalM(int x, int y, char wb){
-    int j = y;
+    int j = y-1;
+    //sanity check
+    
     //up right safety check
-    for(int i = x; i < 8; i++){
-        if(boardArr[j][i] != " "){
-            whiteOrBlack(i,j,wb);
-            break;
+    for(int i = x+1; i < 8; i++){
+        if(sanityCheck(i, j) == true){
+            if(boardArr[j][i] != " "){
+                whiteOrBlack(i,j,wb);
+                break;
+            }
+            whiteOrBlack(i,j,wb);                
         }
-        whiteOrBlack(i,j,wb);
         j --;
-    }   
+    }  
+    
+ 
     //down right
-    for(int i = x; i < 8; i++){
-        if(boardArr[j][i] != " "){
-            whiteOrBlack(i,j,wb);
-            break;
+    j = y+1;
+    
+    for(int i = x+1; i < 8; i++){
+        if(sanityCheck(i, j) == true){
+            if(boardArr[j][i] != " "){
+                whiteOrBlack(i,j,wb);
+                break;
+            }
+            whiteOrBlack(i,j,wb);           
         }
-        whiteOrBlack(i,j,wb);
         j ++;
-    }
+    }        
+    
+
     //down left
-    for(int i = x; i > -1; i--){
-        if(boardArr[j][i] != " "){
-            whiteOrBlack(i,j,wb);
-            break;
+    j = y+1;
+    
+    for(int i = x-1; i > -1; i--){
+        if(sanityCheck(i, j) == true){
+            if(boardArr[j][i] != " "){
+                whiteOrBlack(i,j,wb);
+                break;
+            }
+            whiteOrBlack(i,j,wb);            
         }
-        whiteOrBlack(i,j,wb);
         j ++;
-    }
+    }        
+    
+
     //up left
-    for(int i = x; i > -1; i--){
-        if(boardArr[j][i] != " "){
-            whiteOrBlack(i,j,wb);
-            break;
+    j = y-1;
+    
+    for(int i = x-1; i > -1; i--){
+        if(sanityCheck(i, j) == true){
+            if(boardArr[j][i] != " "){
+                whiteOrBlack(i,j,wb);
+                break;
+            }
+            whiteOrBlack(i,j,wb);            
         }
-        whiteOrBlack(i,j,wb);
         j --;
-    }
+    }        
+    
+
 }
 
 void Pieces::knightM(int x, int y, char wb){

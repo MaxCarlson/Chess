@@ -55,13 +55,7 @@ string boardArr [8][8]= {
 
 int main(int argc, char** argv) {
     
-    //setting safety arrays to all true
-    for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
-            whiteSafe[i][j] = true;
-            blackSafe[i][j] = true;
-        }
-    }
+
 
     Board  newBoard;
     cout << "Enter the coordinates of the piece you wish to move " << endl;
