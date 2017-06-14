@@ -54,9 +54,9 @@ Board::printBoard(){
                     SetConsoleTextAttribute(hConsole, 240);
                 }
             }
-            cout << boardArr[i][j] << " " << std::flush;
+            std::cout << boardArr[i][j] << " " << std::flush;
         }
-        cout << endl;
+        std::cout << endl;
     }
     
 }

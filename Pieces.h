@@ -52,8 +52,11 @@ private:
     void upDownLeftRightM(int x, int y, char wb);
     void diagonalM(int x, int y, char wb);
     void knightM(int x, int y, char wb);
+    void kingM(int x, int y, char wb);
     
+    //small check for king safety to re-use indiscriminate of color
     void whiteOrBlack(int x, int y, char wb);
+    
     
     //Piece and move coordinates
     bool whiteKingMoved = false;

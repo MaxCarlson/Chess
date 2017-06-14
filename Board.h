@@ -28,10 +28,6 @@ private:
     
 public:
     Board();
-
-
-    
-    
     printBoard();
 
 

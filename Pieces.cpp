@@ -30,12 +30,8 @@ Pieces::Pieces(char a,char b, char c, char d) {
     y1 = flip[y1];
     y2 = flip[y2];
     
-    //seed both king safety arrays
-    for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
             
-        }
-    }
+        
     
     
 }
@@ -56,9 +52,9 @@ bool Pieces::whichPiece(){
         }
     }
     
-    ////////KINGS IS SAFE CHECK
+    ////////KINGS IS SAFE CHECK 
     isWhiteKingSafe();
-    isBlackKingSafe();
+    isBlackKingSafe();  //DELETES 0,0 black rook
     //find which piece to move
     //white pieces
     if(turns % 2 == 0){
@@ -107,40 +103,78 @@ bool Pieces::whichPiece(){
 
 //checking all squares to see where king can move or not
 bool Pieces::isWhiteKingSafe(){
-    //denoting we're marking whites un-safe areas
+//denoting we're marking whites un-safe areas
     char w = 'w';
     //array loop to mark board of unsafe areas
     for(int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             if(boardArr[i][j] == "p"){
-                whiteSafe[i-1][j+1] = false;
-                whiteSafe[i-1][j-1] = false;
+                //sanity checks
+                if(i > 0 && j < 7){
+                    whiteSafe[i-1][j+1] = false;
+                } else if (i > 0 && j > 0){
+                    whiteSafe[i-1][j-1] = false;
+                }
             }else if(boardArr[i][j] == "r"){
                 upDownLeftRightM(j, i, w);    
             }else if(boardArr[i][j] == "n"){
-                knightM(); //still need to code!!!!!!!!!!!!
+                knightM(j, i, w); 
             } else if(boardArr[i][j] == "b"){
                 diagonalM(j, i, w);
             } else if (boardArr[i][j] == "q"){
                 diagonalM(j, i, w);
                 upDownLeftRightM(j, i, w);
+            }else if (boardArr[j][i]== "k"){
+                kingM(j, i, w);
             }
         }
     }
     
 }
 
+
+
 bool Pieces::isBlackKingSafe(){
-    
+//denoting we're marking whites un-safe areas
+    char w = 'b';
+    //array loop to mark board of unsafe areas
+    for(int i = 0; i < 8; i++){
+        for (int j = 0; j < 8; j++){
+            if(boardArr[i][j] == "P"){
+                //sanity checks 
+                if(i < 7 && j<7){
+                    blackSafe[i+1][j+1] = false;    
+                } else if(i < 7 && j > 0){
+                    blackSafe[i+1][j-1] = false;
+                }
+            }else if(boardArr[i][j] == "R"){
+                upDownLeftRightM(j, i, w);    
+            }else if(boardArr[i][j] == "N"){
+                knightM(j, i, w); 
+            } else if(boardArr[i][j] == "B"){
+                diagonalM(j, i, w);
+            } else if (boardArr[i][j] == "Q"){
+                diagonalM(j, i, w);
+                upDownLeftRightM(j, i, w);
+            }else if (boardArr[i][j] == "K"){
+                kingM(j, i, w);
+            }
+        }
+    }    
 }
 
 //mark where is unsafe and figure out who
 void Pieces::whiteOrBlack(int x, int y, char wb){
+    if(x > 7 || x < 0){
+        return;
+    } else if (y > 7 || y < 0){
+        return;
+    }
     if(wb == 'w'){
-            whiteSafe[y][x] = false;
-        } else if (wb == 'b'){
-            blackSafe[y][x] = false;
-        }
+        whiteSafe[y][x] = false;
+    } else if (wb == 'b'){
+        blackSafe[y][x] = false;
+    }
 }
 
 void Pieces::upDownLeftRightM(int x, int y, char wb){
@@ -220,14 +254,37 @@ void Pieces::diagonalM(int x, int y, char wb){
 }
 
 void Pieces::knightM(int x, int y, char wb){
-    
+    //counter clock-wise all knight jumps
+    //Up right
+    whiteOrBlack(x-2,y-1,wb);
+    whiteOrBlack(x-1,y-2,wb);
+    //Down right
+    whiteOrBlack(x-2,y+1,wb);
+    whiteOrBlack(x-1,y+2,wb);
+    //Down left
+    whiteOrBlack(x+1,y+2,wb);
+    whiteOrBlack(x+2,y+1,wb);
+    //Up left
+    whiteOrBlack(x+2,y-1,wb);
+    whiteOrBlack(x+1,y-2,wb);
+}
+
+void Pieces::kingM(int x, int y, char wb){
+    //clock-wise starting at 12
+    //king attack safety marking
+    whiteOrBlack(x,y-1,wb);
+    whiteOrBlack(x+1,y-1,wb);
+    whiteOrBlack(x+1,y,wb);
+    whiteOrBlack(x+1,y+1,wb);
+    whiteOrBlack(x,y+1,wb);
+    whiteOrBlack(x-1,y+1,wb);
+    whiteOrBlack(x-1,y,wb);
+    whiteOrBlack(x-1,y-1,wb);
 }
 
 // Test if moves are valid + move piece + take piece
 bool Pieces::whiteKing(){
     //king is safe after move check
-    
-    
     //up
     if(y1-y2 == 1 && x1 == x2){
         for(int i = 0; i < 7; i++){
