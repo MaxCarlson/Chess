@@ -47,6 +47,21 @@ bool Pieces::whichPiece(){
         }
     }
     
+    //Don't move opponent piece check
+    if(turns % 2 == 0){
+        for(int i = 0; i < 6; i++){
+            if(boardArr[y1][x1] == blackPieces[i]){
+                return false;
+            }
+        }
+    } else if (turns % 2 == 1){
+        for(int i = 0; i < 6; i++){
+            if(boardArr[y1][x1] == whitePieces[i]){
+                return false;
+            }
+        }
+    }
+    
     //setting king safety arrays to all true
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
@@ -55,116 +70,108 @@ bool Pieces::whichPiece(){
         }
     }
     
-    ////////Set king safety boards
+    //Set king safety boards
     whiteKingSaftey();
     blackKingSafety(); 
     
     //find which piece to move
-    
+    //marker for piece being moved
+    std::string pieceMoved;
     //white pieces
     if(turns % 2 == 0){
         if(boardArr[y1][x1] == "P"){
-            whitePawn();
-            whiteKingSaftey();
-            if(isWhiteKingSafe() == false){
-                kingIsUnsafe("P");
+            if(whitePawn() == false){
                 return false;
-            }            
-        }else if(boardArr[y1][x1] == "R"){
-            whiteRook();
-            whiteKingSaftey();
-            if(isWhiteKingSafe() == false){
-                kingIsUnsafe("R");
-                return false;
-            }               
-        }else if(boardArr[y1][x1] == "N"){
-            whiteKnight();
-            whiteKingSaftey();
-            if(isWhiteKingSafe() == false){
-                kingIsUnsafe("N");
-                return false;
-            }               
-        } else if(boardArr[y1][x1] == "B"){
-            whiteBishop();
-            whiteKingSaftey();
-            if(isWhiteKingSafe() == false){
-                kingIsUnsafe("B");
-                return false;
-            }               
-        } else if(boardArr[y1][x1] == "Q"){
-            whiteQueen();
-            whiteKingSaftey();
-            if(isWhiteKingSafe() == false){
-                kingIsUnsafe("Q");
-                return false;
-            }               
-        }else if(boardArr[y1][x1] == "K"){
-            if(whiteKing() == true){
-                whiteKingSaftey();
-                if(isWhiteKingSafe() == false){
-                    kingIsUnsafe("K");
-                    return false;
-                }                   
-                whiteKingMoved = true;
-                return true;
             }
+            pieceMoved = "P";           
+        }else if(boardArr[y1][x1] == "R"){
+            if(whiteRook() == false){
+                return false;
+            }
+            pieceMoved = "R";             
+        }else if(boardArr[y1][x1] == "N"){
+            if(whiteKnight() == false){
+                return false;
+            }
+            pieceMoved = "N";          
+        } else if(boardArr[y1][x1] == "B"){
+            if(whiteBishop() == false){
+                return false;
+            }
+            pieceMoved = "B";           
+        } else if(boardArr[y1][x1] == "Q"){
+            if(whiteQueen() == false){
+                return false;
+            }
+            pieceMoved = "Q";              
+        }else if(boardArr[y1][x1] == "K"){
+            if(whiteKing() == false){
+                return false;
+            }
+            pieceMoved = "K";    
         }
+        //find out if moving piece makes king unsafe 
+        //and move piece back if it does
+        whiteKingSaftey();
+        if(isWhiteKingSafe() == false){
+            kingIsUnsafe(pieceMoved);
+            return false;
+        } 
+        if(pieceMoved == "K"){
+            whiteKingMoved = true;
+        }
+        return true;
     //black pieces    
     }else if (turns % 2 == 1) {
         if(boardArr[y1][x1] == "p"){
-            blackPawn();
-            blackKingSafety();
-            if(isBlackKingSafe() == false){
-                kingIsUnsafe("p");
+            if(blackPawn() == false){
                 return false;
-            }             
-        }else if(boardArr[y1][x1] == "r"){
-            blackRook();
-            blackKingSafety();
-            if(isBlackKingSafe() == false){
-                kingIsUnsafe("r");
-                return false;
-            } 
-        } else if(boardArr[y1][x1] == "n"){
-            blackKnight();
-            blackKingSafety();
-            if(isBlackKingSafe() == false){
-                kingIsUnsafe("n");
-                return false;
-            } 
-        }else if(boardArr[y1][x1] == "b"){
-            blackBishop();
-            blackKingSafety();
-            if(isBlackKingSafe() == false){
-                kingIsUnsafe("b");
-                return false;
-            } 
-        }else if(boardArr[y1][x1] == "q"){
-            blackQueen();
-            blackKingSafety();
-            if(isBlackKingSafe() == false){
-                kingIsUnsafe("q");
-                return false;
-            } 
-        }else if(boardArr[y1][x1] == "k"){
-            if(blackKing() == true){
-                blackKingSafety();
-                if(isBlackKingSafe() == false){
-                    kingIsUnsafe("k");
-                    return false;
-                } 
-                blackKingMoved = true;
-                return true;
             }
+            pieceMoved = "p";        
+        }else if(boardArr[y1][x1] == "r"){
+            if(blackRook() == false){
+                return false;
+            }
+            pieceMoved = "r";
+        } else if(boardArr[y1][x1] == "n"){
+            if(blackKnight() == false){
+                return false;
+            }
+            pieceMoved = "n";
+        }else if(boardArr[y1][x1] == "b"){
+            if(blackBishop() == false){
+                return false; 
+            }
+            pieceMoved = "b"; 
+        }else if(boardArr[y1][x1] == "q"){
+            if (blackQueen() == false){
+                return false;
+            }
+            pieceMoved = "q";
+        }else if(boardArr[y1][x1] == "k"){
+            if(blackKing() == false){
+                return false;
+            }
+            pieceMoved = "k";
         }
+        blackKingSafety();
+        if(isBlackKingSafe() == false){
+            kingIsUnsafe(pieceMoved);
+            return false;
+        } 
+        if(pieceMoved == "k"){
+            blackKingMoved = true;
+        }
+        return true;
     }
     
     
     
-    return true;    
+    return false;    
 }
 //NEED add castling
 //Need En Passant
+//////
 
 bool Pieces::isWhiteKingSafe(){
     int x, y;
@@ -218,7 +225,8 @@ bool Pieces::whiteKingSaftey(){
                 //pawn sanity checks
                 if(i < 7 && j < 7){
                     whiteSafe[i+1][j+1] = false;
-                } else if (i < 7 && j > 0){
+                } 
+                if (i < 7 && j > 0){
                     whiteSafe[i+1][j-1] = false;
                 }
             }else if(boardArr[i][j] == "r"){
@@ -250,7 +258,8 @@ bool Pieces::blackKingSafety(){
                 //pawn sanity checks 
                 if(i > 0 && j<7){
                     blackSafe[i-1][j+1] = false;    
-                } else if(i > 0 && j > 0){
+                }
+                if(i > 0 && j > 0){
                     blackSafe[i-1][j-1] = false;
                 }
             }else if(boardArr[i][j] == "R"){

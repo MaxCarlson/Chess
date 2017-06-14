@@ -32,7 +32,7 @@ using namespace std;
 /*
  * 
  */
-bool check = false;
+bool inCheck = false;
 bool checkMate = false;
 bool whoMove = false;
 int turns = 0;
