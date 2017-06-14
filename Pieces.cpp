@@ -29,11 +29,6 @@ Pieces::Pieces(char a,char b, char c, char d) {
     y2 = d-'0';
     y1 = flip[y1];
     y2 = flip[y2];
-    
-            
-        
-    
-    
 }
 
 bool Pieces::whichPiece(){
@@ -60,25 +55,56 @@ bool Pieces::whichPiece(){
         }
     }
     
-    ////////KINGS IS SAFE CHECK 
-    isWhiteKingSafe();
-    isBlackKingSafe();  
+    ////////Set king safety boards
+    whiteKingSaftey();
+    blackKingSafety(); 
+    
     //find which piece to move
     
     //white pieces
     if(turns % 2 == 0){
         if(boardArr[y1][x1] == "P"){
             whitePawn();
+            whiteKingSaftey();
+            if(isWhiteKingSafe() == false){
+                kingIsUnsafe("P");
+                return false;
+            }            
         }else if(boardArr[y1][x1] == "R"){
             whiteRook();
+            whiteKingSaftey();
+            if(isWhiteKingSafe() == false){
+                kingIsUnsafe("R");
+                return false;
+            }               
         }else if(boardArr[y1][x1] == "N"){
             whiteKnight();
+            whiteKingSaftey();
+            if(isWhiteKingSafe() == false){
+                kingIsUnsafe("N");
+                return false;
+            }               
         } else if(boardArr[y1][x1] == "B"){
             whiteBishop();
+            whiteKingSaftey();
+            if(isWhiteKingSafe() == false){
+                kingIsUnsafe("B");
+                return false;
+            }               
         } else if(boardArr[y1][x1] == "Q"){
             whiteQueen();
+            whiteKingSaftey();
+            if(isWhiteKingSafe() == false){
+                kingIsUnsafe("Q");
+                return false;
+            }               
         }else if(boardArr[y1][x1] == "K"){
             if(whiteKing() == true){
+                whiteKingSaftey();
+                if(isWhiteKingSafe() == false){
+                    kingIsUnsafe("K");
+                    return false;
+                }                   
                 whiteKingMoved = true;
                 return true;
             }
@@ -87,16 +113,46 @@ bool Pieces::whichPiece(){
     }else if (turns % 2 == 1) {
         if(boardArr[y1][x1] == "p"){
             blackPawn();
+            blackKingSafety();
+            if(isBlackKingSafe() == false){
+                kingIsUnsafe("p");
+                return false;
+            }             
         }else if(boardArr[y1][x1] == "r"){
             blackRook();
+            blackKingSafety();
+            if(isBlackKingSafe() == false){
+                kingIsUnsafe("r");
+                return false;
+            } 
         } else if(boardArr[y1][x1] == "n"){
             blackKnight();
+            blackKingSafety();
+            if(isBlackKingSafe() == false){
+                kingIsUnsafe("n");
+                return false;
+            } 
         }else if(boardArr[y1][x1] == "b"){
             blackBishop();
+            blackKingSafety();
+            if(isBlackKingSafe() == false){
+                kingIsUnsafe("b");
+                return false;
+            } 
         }else if(boardArr[y1][x1] == "q"){
             blackQueen();
+            blackKingSafety();
+            if(isBlackKingSafe() == false){
+                kingIsUnsafe("q");
+                return false;
+            } 
         }else if(boardArr[y1][x1] == "k"){
             if(blackKing() == true){
+                blackKingSafety();
+                if(isBlackKingSafe() == false){
+                    kingIsUnsafe("k");
+                    return false;
+                } 
                 blackKingMoved = true;
                 return true;
             }
@@ -105,13 +161,54 @@ bool Pieces::whichPiece(){
     
     
     
-    
+    return true;    
 }
 //NEED add castling
 //Need En Passant
 
-//checking all squares to see where king can move or not
 bool Pieces::isWhiteKingSafe(){
+    int x, y;
+    //find king
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            if(boardArr[i][j] == "K"){
+                x = j;
+                y = i;
+            }
+        }
+    }
+    //find if king position is safe
+    if(whiteSafe[y][x] == false){
+        return false;
+    }
+    return true;
+}
+
+bool Pieces::isBlackKingSafe(){
+    int x, y;
+    //find king
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            if(boardArr[i][j] == "k"){
+                x = j;
+                y = i;
+            }            
+        }
+    }  
+    //find if king position is safe
+    if(blackSafe[y][x] == false){
+        return false;
+    }   
+    return true;
+}
+void Pieces::kingIsUnsafe(std::string p){
+    boardArr[y2][x2] = " ";
+    boardArr[y1][x1] = p;
+    cout << "That move puts you into check! Try again." << endl;
+}
+
+//checking all squares to see where king can move or not
+bool Pieces::whiteKingSaftey(){
 //denoting we're marking whites un-safe areas
     char w = 'w';
     //array loop to mark board of unsafe areas
@@ -143,7 +240,7 @@ bool Pieces::isWhiteKingSafe(){
 
 
 
-bool Pieces::isBlackKingSafe(){
+bool Pieces::blackKingSafety(){
 //denoting we're marking blacks un-safe areas
     char w = 'b';
     //array loop to mark board of unsafe areas
@@ -342,7 +439,7 @@ bool Pieces::whiteKing(){
         }
         
     //down    
-    } else if(boardArr[y2][x2] == " " && y2-y1 == 1 && x1 == x2){
+    } else if(y2-y1 == 1 && x1 == x2){
         for(int i = 0; i < 7; i++){
             if(boardArr[y2][x2] == blackPieces[i]){
                 boardArr[y1][x1] = " ";
@@ -352,7 +449,7 @@ bool Pieces::whiteKing(){
         }
         
     //right    
-    } else if(boardArr[y2][x2] == " " && y1 == y2 && x2-x1 == 1){
+    } else if(y1 == y2 && x2-x1 == 1){
         for(int i = 0; i < 7; i++){
             if(boardArr[y2][x2] == blackPieces[i]){
                 boardArr[y1][x1] = " ";
@@ -362,7 +459,43 @@ bool Pieces::whiteKing(){
         }
         
     //left    
-    } else if(boardArr[y2][x2] == " " && y1 == y2 && x1-x2 == 1){
+    } else if(y1 == y2 && x1-x2 == 1){
+        for(int i = 0; i < 7; i++){
+            if(boardArr[y2][x2] == blackPieces[i]){
+                boardArr[y1][x1] = " ";
+                boardArr[y2][x2] = "K";
+                return true;
+            }
+        }
+    //up left    
+    }else if(y1-y2 == 1 && x1-x2 == 1){
+        for(int i = 0; i < 7; i++){
+            if(boardArr[y2][x2] == blackPieces[i]){
+                boardArr[y1][x1] = " ";
+                boardArr[y2][x2] = "K";
+                return true;
+            }
+        }
+    //up right    
+    } else if(y1-y2 == 1 && x1-x2 == -1){
+        for(int i = 0; i < 7; i++){
+            if(boardArr[y2][x2] == blackPieces[i]){
+                boardArr[y1][x1] = " ";
+                boardArr[y2][x2] = "K";
+                return true;
+            }
+        }
+    //down left
+    } else if (y1-y2 == -1 && x1-x2 == 1){
+        for(int i = 0; i < 7; i++){
+            if(boardArr[y2][x2] == blackPieces[i]){
+                boardArr[y1][x1] = " ";
+                boardArr[y2][x2] = "K";
+                return true;
+            }
+        }
+    //down right    
+    } else if (y1-y2 == -1 && x1-x2 == -1){
         for(int i = 0; i < 7; i++){
             if(boardArr[y2][x2] == blackPieces[i]){
                 boardArr[y1][x1] = " ";
@@ -371,7 +504,7 @@ bool Pieces::whiteKing(){
             }
         }
     }
-    
+
     //castle
     if(whiteKingMoved == false){
         
@@ -977,7 +1110,7 @@ bool Pieces::whitePawn(){
         boardArr[y1][x1] = " ";
         boardArr[y2][x2] = "P";
         return true;
-    //Need turn to queen
+    //Need turn to queen + others
     }
     return false;
 }
@@ -998,7 +1131,7 @@ bool Pieces::blackPawn(){
         boardArr[y1][x1] = " ";
         boardArr[y2][x2] = "p";
         return true;
-    //Need turn to queen  
+    //Need turn to queen  + others
     } 
     return false;
 }

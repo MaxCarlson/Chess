@@ -39,15 +39,14 @@ private:
     
     // kings safe checking + arrays for white and black lines of attack for king
     
+    bool whiteKingSaftey();
+    bool blackKingSafety();
+    
     bool isWhiteKingSafe();
     bool isBlackKingSafe();
     
-
-    
-    //NEEED STILL
-    bool canWhiteKingMoveThere();
-    bool canBlackKingMoveThere();
-    
+    void kingIsUnsafe(std::string p);
+        
     //Movement safe functions for marking board unsafe
     void upDownLeftRightM(int x, int y, char wb);
     void diagonalM(int x, int y, char wb);
