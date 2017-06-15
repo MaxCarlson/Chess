@@ -164,14 +164,12 @@ bool Pieces::whichPiece(){
         }
         return true;
     }
-    
-    
-    
+
     return false;    
 }
 //NEED add castling
 //Need En Passant
-//////
+
 
 bool Pieces::isWhiteKingSafe(){
     int x, y;
@@ -280,6 +278,7 @@ bool Pieces::blackKingSafety(){
 
 //mark where is unsafe and figure out who
 void Pieces::whiteOrBlack(int x, int y, char wb){
+    //sanity check
     if(x > 7 || x < 0){
         return;
     } else if (y > 7 || y < 0){

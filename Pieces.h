@@ -29,6 +29,9 @@ public:
     
     bool whichPiece();
     
+    static bool isWhiteKingSafe();
+    static bool isBlackKingSafe();
+    
 private:
     char alphabet[8] = {'a','b','c','d','e','f','g','h'};
     int flip[8] = {7, 6, 5, 4, 3, 2, 1, 0};
@@ -42,8 +45,6 @@ private:
     bool whiteKingSaftey();
     bool blackKingSafety();
     
-    bool isWhiteKingSafe();
-    bool isBlackKingSafe();
     
     void kingIsUnsafe(std::string p);
         
